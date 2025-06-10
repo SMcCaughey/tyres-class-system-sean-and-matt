@@ -5,15 +5,15 @@
 As a car owner
 So that I can keep a record of details about my tyres
 I want to keep track of the tyres individually, by their position on my car
-
+----------------------------------------------------------------------------------------------------------
 As a car owner
 So that I have the two important pieces of data for a tyre
 I want to be able to record both tyre pressure and tyre tread depth
-
+----------------------------------------------------------------------------------------------------------
 As a car owner
 So that I have a history of tyre readings
 I want to be able to keep a record of historical readings, when those were, as well as current readings
-
+----------------------------------------------------------------------------------------------------------
 As a car owner
 So that I can see the details of my car at a glance
 I want to list the tyres' positions, latest readings and when those were
@@ -26,67 +26,76 @@ uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 
 ```
 ┌────────────────────────────┐
-│ MusicPlayer                │
+│ Car                        │
 │                            │
-│ - tracks                   │
-│ - add(track)               │
-│ - search_by_title(keyword) │
-│   => [tracks...]           │
+│ - (arg)Tyre
+  - (method) add_entry() - LR.add_data(Tyre)
+│ - (method) retrieve_data() -   LR.retrieve_data()                       │
+│ -                          │
+│   =>                       │
 └───────────┬────────────────┘
             │
             │ owns a list of
             ▼
 ┌─────────────────────────┐
-│ Track(title, artist)    │
+│ Tyre(pressure, tread-depth)│
 │                         │
-│ - title                 │
-│ - artist                │
-│ - format()              │
-│   => "TITLE by ARTIST"  │
+│ - (arg)pressure         │
+│ - (arg)tread-depth      │
+│ - (method) record_data() - dict: datetime: {pressure: tread-depth} for k, v
+│ 
+│   =>                    │
 └─────────────────────────┘
 ```
 
 _Also design the interface of each class in more detail._
 
 ```python
-class MusicLibrary:
+class Car:
     # User-facing properties:
-    #   tracks: list of instances of Track
+    #   tracks: list of instances of Tyre
 
     def __init__(self):
         pass # No code here yet
 
-    def add(self, track):
+    def add_entry(self, Tyre):
         # Parameters:
-        #   track: an instance of Track
+        #   Tyre: an instance of Tyre
         # Side-effects:
-        #   Adds the track to the tracks property of the self object
+        #   Adds the tyre data to the list of tyres
         pass # No code here yet
 
-    def search_by_title(self, keyword):
+    def retrieve_data(self, Tyre):
         # Parameters:
-        #   keyword: string
+        #   Tyre: an instance of Tyre
         # Returns:
-        #   A list of the Track objects that have titles that include the keyword
+        #   A dictionary of tyre's parameters sorted by chronological order (using datetime)
         pass # No code here yet
 
+    def overview(self):
+        # Parameters
 
-class Track:
+
+class Tyre:
     # User-facing properties:
-    #   title: string
-    #   artist: string
+    #   pressure: string
+    #   tread-depth: string
+    #   time: datetime.now()
 
-    def __init__(self, title, artist):
+    def __init__(self, pressure, depth):
         # Parameters:
-        #   title: string
-        #   artist: string
+        #   readings: dictionary
         # Side-effects:
-        #   Sets the title and artist properties
+        #   Creates a dictionary
+        #   Add a datetime.now() entry to the dictionary as a key.
         pass # No code here yet
 
-    def format(self):
-        # Returns:
-        #   A string of the form "TITLE by ARTIST"
+    def record_data(self, pressure, depth):
+        # Parameters:
+        #   pressure: string
+        #   depth: string
+        # Side-Effects:
+        #   Adds a new entry to the dictionary with datetime.now() as a key
         pass # No code here yet
 
 ```
@@ -100,14 +109,13 @@ combinations that reflect the ways in which the system will be used._
 # EXAMPLE
 
 """
-Given a library
-When we add two tracks
-We see those tracks reflected in the tracks list
+Create a car
+We create, then we add one tyre (FR)
+We see that tyre is an object within car as an instance of tyre.
 """
-library = MusicLibrary()
-track_1 = Track("Carte Blanche", "Veracocha")
-track_2 = Track("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
+car = Car()
+Front-Right = Tyre("pressure", "depth")
+car.add(Front-Right)
 library.add(track_2)
 library.tracks # => [track_1, track_2]
 ```
