@@ -142,8 +142,11 @@ RF = Tyre('1', '1')
 assert RF.record_data() == {datetime.now: ['1', '1']}
 
 """
-
+Given a car
+check if instance exists
 """
+ford = car()
+assert ford.RF == []
 
 
 # EXAMPLE
