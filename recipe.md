@@ -126,6 +126,26 @@ _Create examples, where appropriate, of the behaviour of each relevant class at
 a more granular level of detail._
 
 ```python
+
+"""
+When a tyre is created with pre-determined pressure and tread-depth
+Returns an empty dictionary
+"""
+RF = Tyre('1', '1')
+assert RF.data = {}
+
+"""
+Given a pressure and a tread-depth, when tyre.record_data() is called
+Returns dictionary with timestamp as key and the data list as the value
+"""
+RF = Tyre('1', '1')
+assert RF.record_data() == {datetime.now: ['1', '1']}
+
+"""
+
+"""
+
+
 # EXAMPLE
 
 """
@@ -142,3 +162,7 @@ _Encode each example as a test. You can add to the above list as you go._
 
 _After each test you write, follow the test-driving process of red, green,
 refactor to implement the behaviour._
+
+def test_init_create_blank_dictionary():
+    RF = Tyre('1', '1')
+    assert RF.data == {}
